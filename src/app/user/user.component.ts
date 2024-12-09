@@ -1,4 +1,4 @@
-import { Component,signal,computed } from '@angular/core';
+import { Component, computed, EventEmitter, input, Input, output, Output } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-user';
 
 
@@ -12,16 +12,21 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 
 export class UserComponent {
-  selectedUser = signal(DUMMY_USERS[randomIndex]);
-  // selectedUser = DUMMY_USERS[randomIndex];
-  imagePath = computed(() => 'assets/users/'+this.selectedUser().avatar);
-  // get imagePath() {
-  //   return 'assets/users/' + this.selectedUser.avatar;
-  // }
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) avatar!: string; // Decoratar approach (older)
+  @Input({ required: true }) name!: string;
+  // avatar = input.required<string>(); // signal inputs
+  // name = input.required<string>();
+
+  @Output() select = new EventEmitter<string>();
+  // select = output<string>();
+
+  // imagePath = computed(() => 'assets/users/' + this.avatar);
+
+  get imagePath() {
+    return 'assets/users/' + this.avatar;
+  }
   onSelectUser() {
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    // this.selectedUser = DUMMY_USERS[randomIndex];
-    this.selectedUser.set(DUMMY_USERS[randomIndex]);
-    console.log("clicked");
+    this.select.emit(this.id);
   }
 }
