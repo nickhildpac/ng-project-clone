@@ -1,12 +1,6 @@
 import { Component, computed, EventEmitter, input, Input, output, Output } from '@angular/core';
+import { type User } from './user.model';
 
-
-
-interface User {
-  id: string;
-  avatar: string;
-  name: string;
-};
 
 
 @Component({
@@ -18,6 +12,7 @@ interface User {
 
 export class UserComponent {
   @Input({ required: true }) user!: User;  // Decoratar approach (older)
+  @Input() selected?: boolean;
 
   // avatar = input.required<string>(); // signal inputs
   // name = input.required<string>();
