@@ -6,7 +6,7 @@
     </menu>
   </header>
   @if (newTaskClicked) {
-    <app-newtask (cancel)="onCancelNewTask()" (add)="onAddTask($event)"></app-newtask>
+    <app-newtask [userId]="userId" (close)="onCancelNewTask()" ></app-newtask>
   }
   <ul>
     @for (task of selectedUserTasks; track task.id) {
