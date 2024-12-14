@@ -30,10 +30,6 @@ export class TasksComponent {
     this.newTaskClicked = false;
   }
 
-  onCompleteTask(id: string) {
-    this.taskService.removeTask(id);
-  }
-
   onAddTask(newTask: NewTask) {
     this.taskService.addTask(newTask, this.userId);
     this.newTaskClicked = false;
