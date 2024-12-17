@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, input } from "@angular/core";
+import { Component, computed } from "@angular/core";
+import { InvestmentService } from "../investment.service";
 
 @Component({
   'selector': 'app-investment-results',
@@ -9,13 +10,12 @@ import { Component, Input, input } from "@angular/core";
   'imports': [CommonModule]
 })
 export class InvestmentResults {
-  results = input<{
-    year: number;
-    interest: number;
-    valueEndOfYear: number;
-    annualInvestment: number;
-    totalInterest: number;
-    totalAmountInvested: number;
-  }[]>();
+  constructor(private investmentService: InvestmentService) {
+
+  }
+
+  results = computed(() => this.investmentService.resultsData());
+  // results = this.investmentService.resultsData().readOnly();
+
 
 }
